@@ -1,0 +1,218 @@
+-- Create the loading screen
+local ScreenGui = Instance.new("ScreenGui")
+local LoadingFrame = Instance.new("Frame")
+local LoadingText = Instance.new("TextLabel")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+LoadingFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+LoadingFrame.Size = UDim2.new(0, 300, 0, 200)
+LoadingFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+LoadingFrame.Parent = ScreenGui
+
+LoadingText.Size = UDim2.new(1, 0, 1, 0)
+LoadingText.Text = "█▀▄ ▄▀█ █▀█ █▄▀ █░█ █░█ █▄▄   \n█▄▀ █▀█ █▀▄ █░█ █▀█ █▄█ █▄█ \nLoading UI..."
+LoadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+LoadingText.BackgroundTransparency = 1
+LoadingText.TextScaled = true
+LoadingText.Parent = LoadingFrame
+
+wait(3)  -- Display the loading screen for 3 seconds
+
+LoadingFrame:Destroy()  -- Remove loading screen
+
+-- Create the main UI
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 800, 0, 400)  -- Extended UI length
+MainFrame.Position = UDim2.new(0.5, -400, 0.5, -200)
+MainFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)  -- Brighter color
+MainFrame.Parent = ScreenGui
+
+-- Add curved edges
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 12)  -- Curved edges
+UICorner.Parent = MainFrame
+
+-- Create the top bar
+local TopBar = Instance.new("Frame")
+TopBar.Size = UDim2.new(1, 0, 0, 30)
+TopBar.Position = UDim2.new(0, 0, 0, 0)
+TopBar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)  -- Slightly darker color
+TopBar.Parent = MainFrame
+
+-- Add curved edges to the top bar (only top corners)
+local TopBarCorner = Instance.new("UICorner")
+TopBarCorner.CornerRadius = UDim.new(0, 12)
+TopBarCorner.Parent = TopBar
+
+-- Create the title
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0, 100, 0, 30)  -- Smaller title size
+Title.Position = UDim2.new(0.5, -50, 0, 0)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Text = "Recon V1.0.0 BETA"
+Title.TextScaled = true
+Title.Parent = TopBar
+
+-- Create the close button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 0)
+CloseButton.BackgroundTransparency = 1
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Text = "X"
+CloseButton.Parent = TopBar
+
+-- Close button functionality
+CloseButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+end)
+
+-- Create the image on the top left corner
+local LogoImage = Instance.new("ImageLabel")
+LogoImage.Size = UDim2.new(0, 30, 0, 30)
+LogoImage.Position = UDim2.new(0, 5, 0, 5)
+LogoImage.BackgroundTransparency = 1
+LogoImage.Image = "rbxassetid://18716840405"
+LogoImage.Parent = TopBar
+
+-- Enable dragging of MainFrame using the TopBar
+local UIS = game:GetService("UserInputService")
+local dragToggle = nil
+local dragSpeed = 0.05
+local dragStart = nil
+local startPos = nil
+
+local function updateInput(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+TopBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragToggle = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragToggle = false
+            end
+        end)
+    end
+end)
+
+TopBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        UIS.InputChanged:Connect(function(input)
+            if dragToggle then
+                updateInput(input)
+            end
+        end)
+    end
+end)
+
+-- Function to create buttons
+local function createButton(name, position, parent)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = UDim2.new(0, position, 1, -60)
+    button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)  -- Brighter button color
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Text = name
+    button.Parent = parent
+
+    -- Add curved edges to buttons
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 8)
+    buttonCorner.Parent = button
+
+    return button
+end
+
+-- Create buttons
+local buttons = {
+    {name = "Execute", position = 10},
+    {name = "Clear", position = 120},
+    {name = "Save Script", position = 230},
+    {name = "Open Script", position = 340},
+    {name = "Options", position = 450},
+    {name = "Attach", position = 560},
+    {name = "Hub", position = 670}
+}
+
+for _, btn in ipairs(buttons) do
+    local button = createButton(btn.name, btn.position, MainFrame)
+    
+    if btn.name == "Attach" then
+        button.MouseButton1Click:Connect(function()
+            Title.Text = "Scanning..."
+            wait(0.5)
+            Title.Text = "Preparing..."
+            wait(1)
+            Title.Text = "Injecting..."
+            wait(1)
+            Title.Text = "Ready!"
+            wait(0.5)
+            Title.Text = "Recon V1"
+            isAttached = true
+        end)
+    elseif btn.name == "Execute" then
+        button.MouseButton1Click:Connect(function()
+            if isAttached then
+                local code = ConsoleTextBox.Text
+                loadstring(code)()  -- Execute the LUA code from the console
+            else
+                warn("Recon is not attached!")
+            end
+        end)
+    elseif btn.name == "Clear" then
+        button.MouseButton1Click:Connect(function()
+            ConsoleTextBox.Text = ""
+        end)
+    elseif btn.name == "Save Script" then
+        button.MouseButton1Click:Connect(function()
+            savedScript = ConsoleTextBox.Text
+        end)
+    elseif btn.name == "Open Script" then
+        button.MouseButton1Click:Connect(function()
+            ConsoleTextBox.Text = savedScript
+        end)
+    end
+end
+
+-- Create console
+local ConsoleFrame = Instance.new("Frame")
+ConsoleFrame.Size = UDim2.new(0, 770, 1.1, -150)  -- Console size adjusted to extend more and be thinner
+ConsoleFrame.Position = UDim2.new(0, 15, 0, 35)
+ConsoleFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+ConsoleFrame.Parent = MainFrame
+
+local ConsoleTextBox = Instance.new("TextBox")
+ConsoleTextBox.Size = UDim2.new(1, -10, 1, -10)
+ConsoleTextBox.Position = UDim2.new(0, 5, 0, 5)
+ConsoleTextBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+ConsoleTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+ConsoleTextBox.ClearTextOnFocus = false
+ConsoleTextBox.MultiLine = true
+ConsoleTextBox.TextXAlignment = Enum.TextXAlignment.Left
+ConsoleTextBox.TextYAlignment = Enum.TextYAlignment.Top
+ConsoleTextBox.Text = ""
+ConsoleTextBox.Parent = ConsoleFrame
+
+-- Add curved edges to console
+local ConsoleCorner = Instance.new("UICorner")
+ConsoleCorner.CornerRadius = UDim.new(0, 8)
+ConsoleCorner.Parent = ConsoleFrame
+
+-- Add scrolling functionality to the console
+local ConsoleScrollingFrame = Instance.new("ScrollingFrame")
+ConsoleScrollingFrame.Size = ConsoleTextBox.Size
+ConsoleScrollingFrame.Position = ConsoleTextBox.Position
+ConsoleScrollingFrame.BackgroundColor3 = ConsoleTextBox.BackgroundColor3
+ConsoleScrollingFrame.BorderSizePixel = 0
+ConsoleScrollingFrame.CanvasSize = UDim2.new(1, 0, 2, 0)
+ConsoleScrollingFrame.ScrollBarThickness = 6
+ConsoleScrollingFrame.Parent = ConsoleFrame
+
+ConsoleTextBox.Parent = ConsoleScrollingFrame
