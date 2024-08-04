@@ -1,246 +1,185 @@
--- Services
-local UserInputService = game:GetService("UserInputService")
+-- Gui to Lua
+-- Version: 3.2
 
--- Create UI components
-local ScreenGui = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local TitleLabel = Instance.new("TextLabel")
-local ImageLabel = Instance.new("ImageLabel")
-local TabManager = Instance.new("Frame")
-local NewTabButton = Instance.new("TextButton")
-local ExecuteButton = Instance.new("TextButton")
-local CloseButton = Instance.new("TextButton")
+-- Instances:
 
--- Set up the ScreenGui
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ResetOnSpawn = false
+local ReconExecutor = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Panel = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local SideUI = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextLabel_3 = Instance.new("TextLabel")
+local TextLabel_4 = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local UICorner_4 = Instance.new("UICorner")
+local Execute = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local Clear = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
 
--- Set up the MainFrame
-MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-MainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
-MainFrame.Size = UDim2.new(0, 400, 0, 300)
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.BackgroundTransparency = 0
-MainFrame.BorderSizePixel = 0
-MainFrame.ZIndex = 1
-MainFrame.ClipsDescendants = true
+--Properties:
 
--- Round corners for MainFrame
-local UICornerMain = Instance.new("UICorner")
-UICornerMain.CornerRadius = UDim.new(0, 15)
-UICornerMain.Parent = MainFrame
+ReconExecutor.Name = "Recon Executor"
+ReconExecutor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ReconExecutor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Outline for MainFrame
-local UIStrokeMain = Instance.new("UIStroke")
-UIStrokeMain.Parent = MainFrame
-UIStrokeMain.Color = Color3.fromRGB(255, 255, 255)
-UIStrokeMain.Thickness = 2
+Main.Name = "Main"
+Main.Parent = ReconExecutor
+Main.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.0566523597, 0, 0.565162897, 0)
+Main.Size = UDim2.new(0, 472, 0, 233)
 
--- Set up the TitleLabel
-TitleLabel.Parent = MainFrame
-TitleLabel.BackgroundTransparency = 1
-TitleLabel.Position = UDim2.new(0.1, 0, 0, 0)
-TitleLabel.Size = UDim2.new(0, 300, 0, 30)
-TitleLabel.Font = Enum.Font.SourceSansBold
-TitleLabel.Text = "Recon V1.0.1"
-TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TitleLabel.TextSize = 20
-TitleLabel.TextXAlignment = Enum.TextXAlignment.Center
+UICorner.Parent = Main
 
--- Set up the ImageLabel
-ImageLabel.Parent = MainFrame
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.Position = UDim2.new(0, 5, 0, 5)
-ImageLabel.Size = UDim2.new(0, 20, 0, 20)
-ImageLabel.Image = "rbxassetid://18716840405"
+Panel.Name = "Panel"
+Panel.Parent = Main
+Panel.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+Panel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Panel.BorderSizePixel = 0
+Panel.Position = UDim2.new(3.2327943e-08, 0, 0, 0)
+Panel.Size = UDim2.new(0, 471, 0, 29)
 
--- Set up the CloseButton
-CloseButton.Parent = MainFrame
-CloseButton.BackgroundTransparency = 1
-CloseButton.Position = UDim2.new(1, -25, 0, 5)
-CloseButton.Size = UDim2.new(0, 20, 0, 20)
-CloseButton.Text = "X"
-CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-CloseButton.TextSize = 20
-CloseButton.BorderSizePixel = 0
+UICorner_2.Parent = Panel
 
--- Set up the TabManager
-TabManager.Parent = MainFrame
-TabManager.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-TabManager.Size = UDim2.new(1, 0, 0, 30)
-TabManager.Position = UDim2.new(0, 0, 0, 30)
+TextLabel.Parent = Panel
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(-0.0148619954, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 66, 0, 29)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "R"
+TextLabel.TextColor3 = Color3.fromRGB(28, 91, 30)
+TextLabel.TextSize = 28.000
 
--- Outline for TabManager
-local UIStrokeTabManager = Instance.new("UIStroke")
-UIStrokeTabManager.Parent = TabManager
-UIStrokeTabManager.Color = Color3.fromRGB(255, 255, 255)
-UIStrokeTabManager.Thickness = 2
+SideUI.Name = "Side UI"
+SideUI.Parent = Panel
+SideUI.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+SideUI.BorderColor3 = Color3.fromRGB(65, 65, 65)
+SideUI.BorderSizePixel = 0
+SideUI.Position = UDim2.new(0.755838633, 0, 1.20517182, 0)
+SideUI.Size = UDim2.new(0, 100, 0, 166)
 
--- Set up the NewTabButton
-NewTabButton.Parent = TabManager
-NewTabButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-NewTabButton.Size = UDim2.new(0, 50, 1, 0)
-NewTabButton.Position = UDim2.new(1, -50, 0, 0)
-NewTabButton.Text = "+"
-NewTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-NewTabButton.BorderSizePixel = 0
+UICorner_3.Parent = SideUI
 
--- Set up the ExecuteButton
-ExecuteButton.Parent = MainFrame
-ExecuteButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-ExecuteButton.Position = UDim2.new(0.9, -80, 1, -30)
-ExecuteButton.Size = UDim2.new(0, 70, 0, 25)
-ExecuteButton.Font = Enum.Font.SourceSans
-ExecuteButton.Text = "Execute"
-ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ExecuteButton.TextSize = 14
-ExecuteButton.BorderSizePixel = 0
+TextLabel_2.Parent = SideUI
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(-0.49000001, 0, -0.210843369, 0)
+TextLabel_2.Size = UDim2.new(0, 198, 0, 123)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "Developed by"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
 
--- Store a list of CodeBoxes for different tabs
-local CodeBoxes = {}
+TextLabel_3.Parent = SideUI
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(-0.49000001, 0, -0.0963855386, 0)
+TextLabel_3.Size = UDim2.new(0, 198, 0, 123)
+TextLabel_3.Font = Enum.Font.SourceSans
+TextLabel_3.Text = "Exploit Devs"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextSize = 14.000
 
--- Function to create new tabs
-local function createNewTab()
-    local TabButton = Instance.new("TextButton")
-    local CloseTabButton = Instance.new("TextButton")
-    local CodeBox = Instance.new("TextBox")
+TextLabel_4.Parent = SideUI
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(-0.49000001, 0, 0, 0)
+TextLabel_4.Size = UDim2.new(0, 198, 0, 123)
+TextLabel_4.Font = Enum.Font.SourceSans
+TextLabel_4.Text = "Offical"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextSize = 14.000
 
-    -- Set up the TabButton
-    TabButton.Parent = TabManager
-    TabButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-    TabButton.Size = UDim2.new(0, 100, 1, 0)
-    TabButton.Position = UDim2.new(0, (#TabManager:GetChildren() - 2) * 100, 0, 0)
-    TabButton.Text = "Tab " .. tostring(#TabManager:GetChildren() - 1)
-    TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TabButton.BorderSizePixel = 0
+TextBox.Parent = Main
+TextBox.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0170000009, 0, 0.150000006, 0)
+TextBox.Size = UDim2.new(0, 333, 0, 167)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "--Recon V1 is here!"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 14.000
+TextBox.TextWrapped = true
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
 
-    -- Set up the CloseTabButton for the Tab
-    CloseTabButton.Parent = TabButton
-    CloseTabButton.BackgroundTransparency = 1
-    CloseTabButton.Position = UDim2.new(1, -15, 0, 0)
-    CloseTabButton.Size = UDim2.new(0, 15, 0, 15)
-    CloseTabButton.Text = "X"
-    CloseTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    CloseTabButton.BorderSizePixel = 0
+UICorner_4.Parent = TextBox
 
-    -- Set up the CodeBox
-    CodeBox.Parent = MainFrame
-    CodeBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    CodeBox.Position = UDim2.new(0, 0, 0, 60)
-    CodeBox.Size = UDim2.new(1, 0, 1, -90)
-    CodeBox.ClearTextOnFocus = false
-    CodeBox.Font = Enum.Font.Code
-    CodeBox.MultiLine = true
-    CodeBox.Text = "-- Write your Lua code here"
-    CodeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    CodeBox.TextSize = 14
-    CodeBox.TextXAlignment = Enum.TextXAlignment.Left
-    CodeBox.TextYAlignment = Enum.TextYAlignment.Top
-    CodeBox.Visible = false
-    table.insert(CodeBoxes, CodeBox)
+Execute.Name = "Execute"
+Execute.Parent = Main
+Execute.BackgroundColor3 = Color3.fromRGB(99, 99, 99)
+Execute.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Execute.BorderSizePixel = 0
+Execute.Position = UDim2.new(0.0169491526, 0, 0.901072741, 0)
+Execute.Size = UDim2.new(0, 73, 0, 16)
+Execute.Font = Enum.Font.SourceSans
+Execute.Text = "Execute"
+Execute.TextColor3 = Color3.fromRGB(255, 255, 255)
+Execute.TextSize = 14.000
 
-    -- Show the new tab's CodeBox and hide others
-    local function selectTab()
-        for _, cb in pairs(CodeBoxes) do
-            cb.Visible = false
-        end
-        CodeBox.Visible = true
-    end
+UICorner_5.Parent = Execute
 
-    -- Select the tab when clicked
-    TabButton.MouseButton1Click:Connect(selectTab)
+Clear.Name = "Clear"
+Clear.Parent = Main
+Clear.BackgroundColor3 = Color3.fromRGB(99, 99, 99)
+Clear.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Clear.BorderSizePixel = 0
+Clear.Position = UDim2.new(0.192796603, 0, 0.901072741, 0)
+Clear.Size = UDim2.new(0, 73, 0, 16)
+Clear.Font = Enum.Font.SourceSans
+Clear.Text = "Clear"
+Clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+Clear.TextSize = 14.000
 
-    -- Function to close the tab
-    CloseTabButton.MouseButton1Click:Connect(function()
-        local tabIndex = TabButton.LayoutOrder
-        table.remove(CodeBoxes, tabIndex + 1)
-        TabButton:Destroy()
-        CodeBox:Destroy()
-        -- Rearrange tabs
-        for i, child in ipairs(TabManager:GetChildren()) do
-            if child:IsA("TextButton") and child ~= NewTabButton then
-                child.Position = UDim2.new(0, (i - 1) * 100, 0, 0)
-                child.LayoutOrder = i - 1
-            end
-        end
-        -- Adjust the position of the NewTabButton
-        NewTabButton.Position = UDim2.new(0, (#TabManager:GetChildren() - 1) * 100, 0, 0)
-        -- Select the first remaining tab if it exists
-        if #CodeBoxes > 0 then
-            CodeBoxes[1].Visible = true
-        end
-    end)
+UICorner_6.Parent = Clear
 
-    -- Adjust the position of the NewTabButton
-    NewTabButton.Position = UDim2.new(0, (#TabManager:GetChildren() - 1) * 100, 0, 0)
-    TabButton.LayoutOrder = #TabManager:GetChildren() - 2
+-- Scripts:
 
-    -- Automatically select the newly created tab
-    selectTab()
+local function DSJZ_fake_script() -- Execute.LocalScript 
+	local script = Instance.new('LocalScript', Execute)
+
+	local button = script.Parent
+	local textbox = script.Parent.Parent.TextBox
+	button.MouseButton1Click:Connect(function()
+		loadstring(textbox.Text)()
+	end)
+	
 end
+coroutine.wrap(DSJZ_fake_script)()
+local function PCAIK_fake_script() -- Clear.LocalScript 
+	local script = Instance.new('LocalScript', Clear)
 
--- Create the first tab by default
-createNewTab()
-
--- Ensure the first tab is selected by default
-if #CodeBoxes > 0 then
-    CodeBoxes[1].Visible = true
+	local button = script.Parent
+	local textbox = script.Parent.Parent.TextBox
+	button.MouseButton1Click:Connect(function()
+		textbox.Text = ""
+	end)
+	
+	
 end
+coroutine.wrap(PCAIK_fake_script)()
+local function DGNYV_fake_script() -- Main.LocalScript 
+	local script = Instance.new('LocalScript', Main)
 
--- Add functionality to the NewTabButton
-NewTabButton.MouseButton1Click:Connect(createNewTab)
-
--- Add functionality to the ExecuteButton
-ExecuteButton.MouseButton1Click:Connect(function()
-    for _, cb in pairs(CodeBoxes) do
-        if cb.Visible then
-            local code = cb.Text
-            -- Securely execute the code here
-            -- Note: Use appropriate security measures for handling code execution
-            print("Executing: " .. code)
-        end
-    end
-end)
-
--- Add functionality to the CloseButton to close the entire UI
-CloseButton.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
-end)
-
--- Make the MainFrame draggable
-local dragging
-local dragInput
-local dragStart
-local startPos
-
-local function update(input)
-    local delta = input.Position - dragStart
-    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	script.Parent.Draggable = true
+	script.Parent.Active = true
+	
 end
-
-MainFrame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = MainFrame.Position
-
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
-MainFrame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
-end)
+coroutine.wrap(DGNYV_fake_script)()
